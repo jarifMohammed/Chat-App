@@ -1,18 +1,14 @@
+const path =require('path')
 const express = require('express')
-const path = require('path')
-const http = require('http')
-const socket = require('socket.io')
+const app =express()
 
-const app = express()
-const server = http.createServer(app)
+const port =process.env.PORT || 3000
+
+const publicPath=path.join(__dirname, '../public')
 
 
-const port = process.env.PORT || 3000
+app.use(express.static(publicPath))
 
-const publicDir = path.join(__dirname, '../public')
-
-app.use(express.static(publicDir))
-
-server.listen(port , () => {
-    console.log(`server is up ${port}`);
+app.listen(port, ()=>{
+    console.log(`Server is running at port ${port}`);
 })

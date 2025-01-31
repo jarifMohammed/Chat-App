@@ -1,16 +1,26 @@
 {
   "name": "chat-app",
   "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/jarifMohammed/Chat-App#readme",
+  "bugs": {
+    "url": "https://github.com/jarifMohammed/Chat-App/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jarifMohammed/Chat-App.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "path": "^0.12.7",
     "socket.io": "^4.8.1"
