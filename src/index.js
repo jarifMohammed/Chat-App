@@ -19,10 +19,18 @@ io.on('connection', (socket)=>{
     console.log('mew websocket connection');
 
     socket.emit('message', 'Welcome!')
+    socket.broadcast.emit('message','A new user has joined')
 
     socket.on('sendMessage', (message) => {
 
         io.emit('message',message)
+    })
+
+    socket.on('sendLocation', (cords) => {
+        io.emit('message', `https://google.com/maps?q=${cords.latitude},${cords.longitude}`)
+    })
+    socket.on('disconnect', () => {
+        io.emit('message','A user has left')
     })
 
 })

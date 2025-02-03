@@ -7,7 +7,22 @@ socket.on('message',(message) => {
 document.querySelector('#message-form').addEventListener('submit', (e) => {
     e.preventDefault()
 
-    const message = document.querySelector('input').value
+    const message = e.target.elements.message.value
 
     socket.emit('sendMessage', message)
+})
+
+document.querySelector('#location').addEventListener('click', () => {
+    if(!navigator.geolocation){
+        return alert('not supported by your browser')
+
+    }
+    navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position);
+        socket.emit('sendLocation', {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+        })
+
+    })
 })
