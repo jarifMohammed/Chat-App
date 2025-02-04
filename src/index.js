@@ -1,40 +1,47 @@
-const path =require('path')
-const http = require('http')
-const express = require('express')
-const socketio = require('socket.io')
 
 
-const app =express()
-const server = http.createServer(app)
-const io = socketio(server)
-
-const port =process.env.PORT || 3000
-
-const publicPath=path.join(__dirname, '../public')
+const path = require("path");
+const http = require("http");
+const express = require("express");
+const socketio = require("socket.io");
 
 
-app.use(express.static(publicPath))
 
-io.on('connection', (socket)=>{
-    console.log('mew websocket connection');
+const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
 
-    socket.emit('message', 'Welcome!')
-    socket.broadcast.emit('message','A new user has joined')
+const port = process.env.PORT || 3000;
 
-    socket.on('sendMessage', (message) => {
+const publicPath = path.join(__dirname, "../public");
 
-        io.emit('message',message)
-    })
+app.use(express.static(publicPath));
 
-    socket.on('sendLocation', (cords) => {
-        io.emit('message', `https://google.com/maps?q=${cords.latitude},${cords.longitude}`)
-    })
-    socket.on('disconnect', () => {
-        io.emit('message','A user has left')
-    })
+io.on("connection", (socket) => {
+  console.log("mew websocket connection");
 
-})
+  socket.emit("message", "Welcome!");
+  socket.broadcast.emit("message", "A new user has joined");
 
-server.listen(port, ()=>{
-    console.log(`Server is running at port ${port}`);
-})
+  socket.on("sendMessage", (message, callback) => {
+    
+    
+
+    io.emit("message", message);
+    callback();
+  });
+
+  socket.on("sendLocation", (cords) => {
+    io.emit(
+      "message",
+      `https://google.com/maps?q=${cords.latitude},${cords.longitude}`
+    );
+  });
+  socket.on("disconnect", () => {
+    io.emit("message", "A user has left");
+  });
+});
+
+server.listen(port, () => {
+  console.log(`Server is running at port ${port}`);
+});
