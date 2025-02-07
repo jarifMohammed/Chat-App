@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
 
   socket.on("sendLocation", (cords, callback) => {
     io.emit(
-      "message",
+      "locationMessage",
       `https://google.com/maps?q=${cords.latitude},${cords.longitude}`
     );
     callback()

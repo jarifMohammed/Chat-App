@@ -15,6 +15,11 @@ socket.on('message',(message) => {
     messages.insertAdjacentHTML('beforeend', html)
 })
 
+
+
+
+
+
 messageForm.addEventListener('submit', (e) => {
     e.preventDefault()
 
